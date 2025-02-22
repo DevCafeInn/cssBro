@@ -1,12 +1,13 @@
 
 import './App.css'
+import Panel from './components/Panel'
 
 function App() {
   console.log("Hey")
 
   return (
     <div id='cssbro'>
-      <h1>CSS Properties</h1>
+      <Panel />
     </div>
   )
 }
