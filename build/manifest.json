@@ -4,7 +4,14 @@
     "version": "1.0.0",
     "description": "Description need to be writted",
     "action": {
-      "default_popup": "index.html"
+      "default_popup": "popup.html"
     },
+    "content_scripts": [
+      {
+        "matches": ["https://*.hemath.dev/*"],
+        "js": ["assets/main.js"],
+        "css": ["assets/main.css"]
+      }
+    ],
     "permissions": []
   }
