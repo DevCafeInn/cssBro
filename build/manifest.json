@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "CSS Bro",
+    "version": "1.0.0",
+    "description": "Description need to be writted",
+    "action": {
+      "default_popup": "index.html"
+    },
+    "permissions": []
+  }
