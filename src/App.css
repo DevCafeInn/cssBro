@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 #cssbro {
   position: absolute;
   right: 50px;
