@@ -1,13 +1,13 @@
-
 import './App.css'
 import Panel from './components/Panel'
 
+const header = document.querySelector('#home h1') as HTMLElement;
+
 function App() {
-  console.log("Hey")
 
   return (
     <div id='cssbro'>
-      <Panel />
+      <Panel element={header}  />
     </div>
   )
 }
