@@ -1,0 +1,111 @@
+.two-d-value-picker {
+    width: 300px;
+    height: 220px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    position: relative;
+}
+
+.two-d-value-picker .picker {
+    width: 50%;
+    height: 44px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: start;
+    position: absolute;
+}
+
+.two-d-value-picker .top.picker {
+    top: 0;
+    left: 50%;
+    justify-content: center;
+    transform: translateX(-50%);
+}
+
+.two-d-value-picker .bottom.picker {
+    bottom: 0;
+    left: 50%;
+    justify-content: center;
+    transform: translateX(-50%);
+}
+
+.two-d-value-picker .left.picker {
+    left: 0;
+    top: 50%;
+    padding-left: 8px;
+    padding-right: 8px;
+    transform: translateY(-50%);
+    width: 23%;
+    height: 100%;
+}
+
+.two-d-value-picker .right.picker {
+    right: 0;
+    top: 50%;
+    justify-content: end;
+    padding-left: 8px;
+    padding-right: 8px;
+    transform: translateY(-50%);
+    width: 23%;
+    height: 100%;
+}
+
+.two-d-value-picker .inner-box {
+    width: 160px;
+    height: 120px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(103, 132, 114, 1);
+}
+
+.two-d-value-picker .inner-box .picker input,
+.two-d-value-picker .inner-box .picker select {
+    padding: 0 !important;
+}
+
+.two-d-value-picker .inner-box .picker {
+    min-width: 53px;
+    height: 35px;
+}
+
+.two-d-value-picker .inner-box .top.picker {
+    width: 100%;
+}
+
+.two-d-value-picker .inner-box .bottom.picker {
+    width: 100%;
+}
+
+.two-d-value-picker .inner-box .left.picker {
+    width: 10%;
+    height: 50%;
+}
+
+.two-d-value-picker .inner-box .right.picker {
+    width: 10%;
+    height: 50%;
+}
+
+.two-d-value-picker #center-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    color: #8b8b8b;
+}
+
+.two-d-value-picker #topleft-text {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 12px;
+    color: #8b8b8b;
+}
