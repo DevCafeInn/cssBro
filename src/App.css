@@ -172,27 +172,10 @@ flex-direction: column;
 #cssbro #panel-container .sub-container .properties {
   display: grid;
   grid-template-columns: auto auto auto;
-  row-gap: 6px;
+  row-gap: 14px;
   margin: 15px 0;
 }
 
-#cssbro #panel-container .sub-container .properties div {
-  width: 75px;
-  /* outline: 1px solid gray; */
-  border-radius: 6px;
-  padding: 5px 10px;
-  display: flex;
-  cursor: pointer;
-}
-
-
-#cssbro #panel-container .sub-container .properties div:hover {
-  outline: 1px solid gray;
-}
-
-#cssbro #panel-container .sub-container .properties div input {
-  width: 2px;
-}
 
 #cssbro #panel-container .sub-container .options-container {
   padding: 20px 0;
