@@ -10,3 +10,212 @@
   border: 1px solid #000;
   background-color: #e6e6e6;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+body {
+  height: 150vh;
+  /* font-family: 'Josefin Sans', sans-serif; */
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+
+#cssbro {
+  height: 85vh;
+  position: fixed;
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(25, 25, 29, 0.95);
+  color: white;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  /* box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 8px 0px, rgba(0, 0, 0, 0.24) 0px 4px 8px 0px; */ 
+}
+
+#cssbro #panel-container {
+width: 350px;
+display: flex;
+flex-direction: column;
+
+}
+
+#cssbro #panel-container .top-container {
+  padding: 20px;
+  border-bottom: 0.8px solid rgba(255, 255, 255, 0.15);
+  /* background-color: red; */
+}
+
+#cssbro #panel-container .header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#cssbro #panel-container .header span.title {
+  font-weight: 700;
+  font-size: 16px;
+  color: rgb(42, 245, 152);
+}
+
+.icon-hover-container {
+  /* background-color: rgba(128, 128, 128, 0.242); */
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.icon-hover-container:hover {
+  background-color: rgba(128, 128, 128, 0.242);
+}
+
+.icon-hover-container:hover .tooltip {
+  display: block;
+}
+
+.tooltip {
+  position: absolute;
+  top: -35px;
+  transform: translateX(-50%);
+  display: none;
+  font-size: 13px;
+  background-color: rgb(47, 47, 47);
+  white-space: nowrap;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid white;
+}
+
+#cssbro #panel-container .header div.pinned-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+#cssbro #panel-container .dimensions {
+  margin-bottom: 10px;
+  color: rgb(204, 204, 204);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#cssbro #panel-container .dimensions span {
+  font-size: 12.6px;
+  font-weight: 400;
+  /* color: rgb(204, 204, 204); */
+}
+
+#cssbro #panel-container .font-details {
+  color: rgb(204, 204, 204);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#cssbro #panel-container .font-details span {
+  font-size: 12.6px;
+  font-weight: 400;
+  /* color: rgb(204, 204, 204); */
+}
+
+#cssbro #panel-container .font-details span a {
+  color: rgb(204, 204, 204);
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  top: -35px;
+  transform: translateX(-50%);
+  display: none;
+  font-size: 13px;
+  background-color: rgb(47, 47, 47);
+  white-space: nowrap;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid white;
+}
+
+#cssbro #panel-container .font-details span a:hover .tooltip {
+  display: block;
+}
+
+
+#cssbro #panel-container .sub-container {
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  /* scrollbar-width: none; */
+  height: 68vh;
+  padding: 0 20px;
+  overscroll-behavior: contain;
+}
+
+.sub-container::-webkit-scrollbar {
+  width: 7px;
+  background-color: rgb(56, 56, 56);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.sub-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, gray, gray);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#cssbro #panel-container .sub-container .properties {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  row-gap: 6px;
+  margin: 15px 0;
+}
+
+#cssbro #panel-container .sub-container .properties div {
+  width: 75px;
+  /* outline: 1px solid gray; */
+  border-radius: 6px;
+  padding: 5px 10px;
+  display: flex;
+  cursor: pointer;
+}
+
+
+#cssbro #panel-container .sub-container .properties div:hover {
+  outline: 1px solid gray;
+}
+
+#cssbro #panel-container .sub-container .properties div input {
+  width: 2px;
+}
+
+#cssbro #panel-container .sub-container .options-container {
+  padding: 20px 0;
+  border-top: 0.8px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+#cssbro #panel-container .sub-container .options-container .options {
+  background: none;
+  border: none;
+  /* padding: 20px 0; */
+  color: rgb(148, 227, 175);
+  display: flex;
+  justify-content: space-between;
+  /* border-top: 0.8px solid rgba(255, 255, 255, 0.15); */
+  font-size: 14px;
+  font-weight: bold;
+  width: 100%;
+  /* margin-bottom: 10px; */
+  cursor: pointer;
+}
+
+#cssbro #panel-container .sub-container .options-container .options:hover {
+  color: rgb(32, 255, 114);
+}
+
