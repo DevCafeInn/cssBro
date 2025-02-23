@@ -3,9 +3,9 @@ import Select from 'react-select';
 import './Typography.css';
 import CSSInput, { Value } from '../../atoms/CSSInput/CSSInput';
 import { FontSizeIcon } from '../../Icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const fonts = [
+export const fonts = [
     {
         value: 'Roboto',
         label: 'Roboto',
@@ -160,23 +160,6 @@ export default function Typography({
     
 
     const selectedFont = fonts.find(font => font.label === fontFamily);
-
-    useEffect(() => {
-        fonts.forEach(font => {
-            font.urls.forEach(url => {
-                const fontFace = new FontFace(font.value, `url(${url.url})`, {
-                    style: url.fontStyle,
-                    weight: url.fontWeight + '',
-                });
-                document.fonts.add(fontFace);
-                fontFace.load().then(() => {
-                    console.log(`${font.value} loaded from ${url}`);
-                }).catch(err => {
-                    console.error(`Failed to load ${font.value} from ${url}:`, err);
-                });
-            });
-        });
-    }, [])
 
     return (
         <div className="typography-container">
