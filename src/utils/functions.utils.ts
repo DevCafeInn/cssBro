@@ -23,3 +23,47 @@ export const calculateNewValue = (
             return startValue;
     }
 };
+
+export function convertUnits(previousUnit: string, currentUnit: string, value: number, contextValue = 100) {
+    const rootFontSize = 16;
+    const vw = window.innerWidth / 100;
+    const vh = window.innerHeight / 100;
+
+    let valueInPx;
+    switch (previousUnit) {
+        case 'px':
+            valueInPx = value;
+            break;
+        case '%':
+            valueInPx = (value / 100) * contextValue;
+            break;
+        case 'em':
+        case 'rem':
+            valueInPx = value * rootFontSize;
+            break;
+        case 'vw':
+            valueInPx = value * vw;
+            break;
+        case 'vh':
+            valueInPx = value * vh;
+            break;
+        default:
+            throw new Error(`Unsupported previous unit: ${previousUnit}`);
+    }
+
+    switch (currentUnit) {
+        case 'px':
+            return valueInPx;
+        case '%':
+            return (valueInPx / contextValue) * 100;
+        case 'em':
+        case 'rem':
+            return valueInPx / rootFontSize;
+        case 'vw':
+            return valueInPx / vw;
+        case 'vh':
+            return valueInPx / vh;
+        default:
+            throw new Error(`Unsupported current unit: ${currentUnit}`);
+    }
+}

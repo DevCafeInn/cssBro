@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllCSSProperties } from "../utils/dom.utils";
-import CSSInput from "./atoms/CSSInput/CSSInput";
+import CSSInput, { Value } from "./atoms/CSSInput/CSSInput";
 import { TwoDValuePicker } from "./atoms/TwoDValuePicker/TwoDValuePicker";
 
 export type PanelProps = {
@@ -8,13 +8,25 @@ export type PanelProps = {
 };
 
 export default function Panel({ element }: PanelProps) {
-    const [ width, setWidth ] = useState(0);
+    const [ css, setCSS ] = useState<Record<string, any>>({});
+    const [ parentData, setParentData ] = useState({
+        width: 0,
+        height: 0,
+    });
 
     useEffect(() => {
-        const css = getAllCSSProperties(element);
-        const _width = Number((css.width as string).replace('px', ''));
+        if(element.parentElement) {
+            const parentCSSProperties = getAllCSSProperties(element.parentElement);
+            const parentWidth = Number(parentCSSProperties.width.toString().replace('px', ''));
+            const parentHeight = Number(parentCSSProperties.height.toString().replace('px', ''));
 
-        setWidth(_width);
+            setParentData({
+                width: parentWidth,
+                height: parentHeight,
+            });
+        }
+
+        setCSS(getAllCSSProperties(element));
     }, []);
 
     return (
@@ -26,15 +38,19 @@ export default function Panel({ element }: PanelProps) {
             <br />
 
             <CSSInput
+                key={JSON.stringify([css.width, JSON.stringify(parentData)])}
+                parentData={parentData}
                 initialValue={{
-                    value: width,
+                    value: Number(css.width?.replace('px', '')),
                     unit: 'px',
                 }}
-                onChange={
-                    (_e) => {
-                        console.log(_e);
+                onChange={(value) => {
+                    const width = value.value;
+                    
+                    if(!isNaN(width)) {
+                        element.style.width = width + value.unit;
                     }
-                }
+                }}
                 leftSlot={ <span>W</span> }
                 name="width"
                 units={[
@@ -52,46 +68,68 @@ export default function Panel({ element }: PanelProps) {
             <br/>
 
             <TwoDValuePicker
+                key={JSON.stringify([
+                    css['margin-top'],
+                    css['margin-bottom'],
+                    css['margin-left'],
+                    css['margin-right'],
+                    css['padding-top'],
+                    css['padding-bottom'],
+                    css['padding-left'],
+                    css['padding-right'],
+                ])}
+                parentData={parentData}
                 showInnerPicker
                 topLeftText="Margin"
                 centerText="Padding"
                 initialData={{
                     top: {
-                        value: 10,
+                        value: Number(css['margin-top']?.replace('px', '')),
                         unit: 'auto',
                     },
                     bottom: {
-                        value: 20,
+                        value: Number(css['margin-bottom']?.replace('px', '')),
                         unit: 'auto',
                     },
                     left: {
-                        value: 30,
+                        value: Number(css['margin-left']?.replace('px', '')),
                         unit: 'auto',
                     },
                     right: {
-                        value: 40,
+                        value: Number(css['margin-right']?.replace('px', '')),
                         unit: 'auto',
                     },
                 }}
                 initialInnerData={{
                     top: {
-                        value: 10 + 40,
+                        value: Number(css['padding-top']?.replace('px', '')),
                         unit: 'auto',
                     },
                     bottom: {
-                        value: 20 + 40,
+                        value: Number(css['padding-bottom']?.replace('px', '')),
                         unit: 'auto',
                     },
                     left: {
-                        value: 30 + 40,
+                        value: Number(css['padding-left']?.replace('px', '')),
                         unit: 'auto',
                     },
                     right: {
-                        value: 40 + 40,
+                        value: Number(css['padding-right']?.replace('px', '')),
                         unit: 'auto',
                     },
                 }}
-                onChange={console.log}
+                onChange={(margin, padding) => {
+                    console.log(margin.top.value + margin.top.unit);
+                    element.style.marginTop = margin.top.value + margin.top.unit;
+                    element.style.marginBottom = margin.bottom.value + margin.bottom.unit;
+                    element.style.marginLeft = margin.left.value + margin.left.unit;
+                    element.style.marginRight = margin.right.value + margin.right.unit;
+
+                    element.style.paddingTop = padding.top.value + padding.top.unit;
+                    element.style.paddingBottom = padding.bottom.value + padding.bottom.unit;
+                    element.style.paddingLeft = padding.left.value + padding.left.unit;
+                    element.style.paddingRight = padding.right.value + padding.right.unit;
+                }}
             />
         </div>
     );

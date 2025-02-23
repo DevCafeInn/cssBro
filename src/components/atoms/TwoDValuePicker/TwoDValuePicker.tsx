@@ -16,6 +16,10 @@ export type TwoDValuePickerProps = {
     initialData?: ValueSet,
     initialInnerData?: ValueSet,
     onChange?: (data: ValueSet, innerData: ValueSet) => void,
+    parentData: {
+        width: number,
+        height: number,
+    }
 };
 
 export function TwoDValuePicker({
@@ -59,6 +63,7 @@ export function TwoDValuePicker({
         },
     },
     onChange = (_, __) => {},
+    parentData,
 }: TwoDValuePickerProps) {
     const [ data, setData ] = useState(initialData);
     const [ innerData, setInnerData ] = useState(initialInnerData);
@@ -66,6 +71,7 @@ export function TwoDValuePicker({
     return (
         <div className='two-d-value-picker'>
             <CSSInput
+                parentData={parentData}
                 initialValue={initialData.top}
                 name='margin-top'
                 onChange={(value: Value) => {
@@ -84,6 +90,7 @@ export function TwoDValuePicker({
             />
 
             <CSSInput
+                parentData={parentData}
                 initialValue={initialData.bottom}
                 name='margin-bottom'
                 onChange={(value: Value) => {
@@ -102,6 +109,7 @@ export function TwoDValuePicker({
             />
 
             <CSSInput
+                parentData={parentData}
                 initialValue={initialData.left}
                 name='margin-left'
                 onChange={(value: Value) => {
@@ -120,6 +128,7 @@ export function TwoDValuePicker({
             />
 
             <CSSInput
+                parentData={parentData}
                 initialValue={initialData.right}
                 name='margin-right'
                 onChange={(value: Value) => {
@@ -149,6 +158,7 @@ export function TwoDValuePicker({
                 ? (
                     <div className='inner-box'>
                         <CSSInput
+                            parentData={parentData}
                             initialValue={initialInnerData.top}
                             name='margin-top'
                             onChange={(value: Value) => {
@@ -167,6 +177,7 @@ export function TwoDValuePicker({
                         />
 
                         <CSSInput
+                            parentData={parentData}
                             initialValue={initialInnerData.bottom}
                             name='margin-bottom'
                             onChange={(value: Value) => {
@@ -185,6 +196,7 @@ export function TwoDValuePicker({
                         />
 
                         <CSSInput
+                            parentData={parentData}
                             initialValue={initialInnerData.left}
                             name='margin-left'
                             onChange={(value: Value) => {
@@ -203,6 +215,7 @@ export function TwoDValuePicker({
                         />
 
                         <CSSInput
+                            parentData={parentData}
                             initialValue={initialInnerData.right}
                             name='margin-right'
                             onChange={(value: Value) => {
