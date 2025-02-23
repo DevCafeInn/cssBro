@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getAllCSSProperties } from "../utils/dom.utils";
 import CSSInput, { Value } from "./atoms/CSSInput/CSSInput";
 import { TwoDValuePicker } from "./atoms/TwoDValuePicker/TwoDValuePicker";
+import { CopyIcon, DimensionIcon, FontIcon, ResetIcon, WrongIcon } from './Icons.tsx'
+import AccordionButton from "./AccordionButton.tsx";
 
 export type PanelProps = {
     element: HTMLElement,
@@ -30,11 +32,102 @@ export default function Panel({ element }: PanelProps) {
     }, []);
 
     return (
-        <div style={{
-            backgroundColor: '#19191d',
-            padding: 50,
-        }}>
-            <h1>CSS Properties</h1>
+        <div id="panel-container">
+            <div className="top-container">
+                <div className="header">
+                    <span className="title">strong</span>
+                    <div className="pinned-controls">
+                        <div className='icon-hover-container'> <CopyIcon width={13}  /> <span className='tooltip'>Copy to clipboard</span> </div>
+                        <div className='icon-hover-container'> <WrongIcon width={9} /> <span className='tooltip'>Close window</span> </div>
+                        <div className='icon-hover-container'> <ResetIcon width={13} /> <span className='tooltip'>Reset CSS changes</span> </div>
+                    </div>
+                </div>
+
+                <div className="dimensions">
+                    <DimensionIcon width={14} />
+                    <span>346.63×34.4</span>
+                </div>
+
+                <div className="font-details">
+                    <FontIcon width={12} />
+                    <span> 
+                        <a href='#'>CerebriSans <span className='tooltip'>Click to search font on google</span></a> 26px
+                        
+                    </span>
+                </div>
+            </div>
+
+
+            <div className="sub-container">
+                <div className="properties">
+                    <div>
+                        <span>X <input /> </span>
+                    </div>
+
+                    <div>
+                        <span>Y <input /> </span>
+                    </div>
+
+                    <div>
+                        <span>L <input /> </span>
+                    </div>
+
+                    <div>
+                        <span>W <input /> </span>
+                    </div>
+
+                    <div>
+                        <span>H <input /> </span>
+                    </div>
+
+                    <div>
+                        <span>0 <input /> </span>
+                    </div>
+                </div>
+
+
+                <AccordionButton label={"Spacing"}>
+                    <div>SPACING</div>
+                    <div>SPACING</div>
+                    <div>SPACING</div>
+                    <div>SPACING</div>
+                    <div>SPACING</div>
+                </AccordionButton>
+                
+                <AccordionButton label={"Typography"}>
+                    <div>Typography</div>
+                </AccordionButton>
+                
+                <AccordionButton label={"Background"}>
+                    <div>Background</div>
+                </AccordionButton>
+
+                <AccordionButton label={"Display"}>
+                    <div>Display</div>
+                </AccordionButton>
+
+                <AccordionButton label={"Border"}>
+                    <div>Border</div>
+                </AccordionButton>
+
+                <AccordionButton label={"Positioning"}>
+                    <div>Positioning</div>
+                </AccordionButton>
+
+                <AccordionButton label={"Box shadow"}>
+                    <div>Box shadow</div>
+                </AccordionButton>
+
+                <AccordionButton label={"Text shadow"}>
+                    <div>Text shadow</div>
+                </AccordionButton>
+
+                <AccordionButton label={"Filters"}>
+                    <div>Filters</div>
+                </AccordionButton>
+
+
+                <h1>CSS Properties</h1>
             <br />
 
             <CSSInput
@@ -131,6 +224,8 @@ export default function Panel({ element }: PanelProps) {
                     element.style.paddingRight = padding.right.value + padding.right.unit;
                 }}
             />
+            </div>
+
         </div>
     );
 }
