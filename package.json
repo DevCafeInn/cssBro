@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-tiny-popover": "^8.1.6"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^1.0.14",

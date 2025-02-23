@@ -3,6 +3,7 @@
     display: inline-block;
     box-sizing: border-box;
     min-width: 65px;
+    max-width: max-content;
     font: 400 13.3333px -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
     margin: initial;
     padding: initial;
@@ -29,18 +30,9 @@
 }
 
 .css-input .description {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
     background-color: #000;
-    border: none;
     border-radius: 8px;
-    padding: 0;
-    transition: none;
     color: white;
-    z-index: 12;
-    display: none;
     border: 1px solid #DDD;
     padding: 8px;
     width: max-content;

@@ -1,6 +1,7 @@
 import { MouseEventHandler, useRef, useState, useEffect, useCallback, JSX } from "react";
 import "./CSSInput.css";
 import { calculateNewValue, convertUnits, DragDirection } from "../../../utils/functions.utils";
+import { Popover } from "react-tiny-popover";
 
 export type Value = {
     value: number,
@@ -32,6 +33,7 @@ export default function CSSInput({
     parentData,
 }: CSSInputProps) {
     const [value, setValue] = useState(initialValue);
+    const [ isPopverOpen, setIsPopoverOpen ] = useState(false);
 
     const startX = useRef<number | null>(null);
     const startY = useRef<number | null>(null);
@@ -104,38 +106,81 @@ export default function CSSInput({
     const cursorStyle = dragDirection.startsWith('horizontal') ? 'ew-resize' : 'ns-resize';
 
     return (
-        <div
-            className={`css-input ${className}`}
-            onMouseDown={!leftSlot ? handleMouseDown : undefined}
-            style={{ cursor: cursorStyle }}
-        >
-            {!leftSlot && (
-                <span className="description">
+        <Popover
+         isOpen={!leftSlot && isPopverOpen}
+         content={({position, nudgeLeft, nudgeTop}: any) => {
+            return (
+                <div className="description" style={{
+                    position,
+                    left: nudgeLeft,
+                    top: nudgeTop,
+                    backgroundColor: '#000',
+                    color: '#FFF',
+                    padding: 8,
+                    borderRadius: 6,
+                    fontSize: 12,
+                    border: '1px solid #DDD',
+                }}>
                     Click and drag to change the {name}
-                </span>
-            )}
+                </div>
+            );
+         }}
+        >
+            <div
+                className={`css-input ${className}`}
+                onMouseDown={!leftSlot ? handleMouseDown : undefined}
+                style={{ cursor: cursorStyle }}
+                onMouseEnter={!leftSlot ? () => setIsPopoverOpen(true): undefined}
+                onMouseLeave={!leftSlot ? () => setIsPopoverOpen(false): undefined}
+            >
 
-            {leftSlot && (
-                <span className="left-icon" onMouseDown={handleMouseDown} style={{ cursor: cursorStyle }}>
-                    <span className="description">
-                        Click and drag to change the {name}
-                    </span>
-                    {leftSlot}
-                </span>
-            )}
+                {leftSlot && (
+                    <Popover
+                        isOpen={isPopverOpen}
+                        // TODO: Refactor to make this part re-usable
+                        content={({position, nudgeLeft, nudgeTop}: any) => {
+                            return (
+                                <div className="description" style={{
+                                    position,
+                                    left: nudgeLeft,
+                                    top: nudgeTop,
+                                    backgroundColor: '#000',
+                                    color: '#FFF',
+                                    padding: 8,
+                                    borderRadius: 6,
+                                    fontSize: 12,
+                                    border: '1px solid #DDD',
+                                }}>
+                                    Click and drag to change the {name}
+                                </div>
+                            );
+                         }}
+                    >
+                        <span
+                            className="left-icon"
+                            onMouseDown={handleMouseDown}
+                            style={{ cursor: cursorStyle }}
+                            onMouseEnter={leftSlot ? () => setIsPopoverOpen(true): undefined}
+                            onMouseLeave={leftSlot ? () => setIsPopoverOpen(false): undefined}
+                        >
+                            {leftSlot}
+                        </span>
+                    </Popover>
+                )}
 
-            {value.unit !== 'auto' && (
-                <input
-                    value={value.value || 0}
-                    onChange={handleChange}
-                />
-            )}
+                {value.unit !== 'auto' && (
+                    <input
+                        value={value.value || 0}
+                        onChange={handleChange}
+                    />
+                )}
 
-            <select value={value.unit} onChange={handleUnitChange}>
-                {units.map(unit => (
-                    <option key={unit} value={unit}>{unit}</option>
-                ))}
-            </select>
-        </div>
+                <select value={value.unit} onChange={handleUnitChange}>
+                    {units.map(unit => (
+                        <option key={unit} value={unit}>{unit}</option>
+                    ))}
+                </select>
+            </div>
+        </Popover>
     );
 }
