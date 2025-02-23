@@ -3,9 +3,15 @@ import './App.css'
 import { fonts } from './components/molecules/Typography/Typography';
 import Panel from './components/Panel'
 
-const header = document.querySelector('#home h1') as HTMLElement;
+// const header = document.querySelector('#home h1') as HTMLElement;
 
-function App() {
+export type AppProps = {
+  element: HTMLElement,
+};
+
+function App({
+  element,
+}: AppProps) {
 
   useEffect(() => {
     fonts.forEach(font => {
@@ -26,7 +32,7 @@ function App() {
 
   return (
     <div id='cssbro'>
-      <Panel element={header}  />
+      <Panel element={element}  />
     </div>
   )
 }
