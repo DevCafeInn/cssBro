@@ -19,7 +19,8 @@ export type CSSInputProps = {
     parentData: {
         width: number,
         height: number,
-    }
+    },
+    isDisabled?: boolean,
 };
 
 export default function CSSInput({
@@ -27,10 +28,11 @@ export default function CSSInput({
     onChange,
     leftSlot,
     name,
-    units = ['auto'],
+    units = [],
     className = '',
     dragDirection = 'horizontal-ltr',
     parentData,
+    isDisabled,
 }: CSSInputProps) {
     const [value, setValue] = useState(initialValue);
     const [ isPopverOpen, setIsPopoverOpen ] = useState(false);
@@ -103,7 +105,11 @@ export default function CSSInput({
         };
     }, [handleMouseDown]);
 
-    const cursorStyle = dragDirection.startsWith('horizontal') ? 'ew-resize' : 'ns-resize';
+    const cursorStyle = isDisabled
+                        ? 'not-allowed'
+                        : dragDirection.startsWith('horizontal')
+                            ? 'ew-resize'
+                            : 'ns-resize';
 
     return (
         <Popover
@@ -127,11 +133,11 @@ export default function CSSInput({
          }}
         >
             <div
-                className={`css-input ${className}`}
-                onMouseDown={!leftSlot ? handleMouseDown : undefined}
-                style={{ cursor: cursorStyle }}
-                onMouseEnter={!leftSlot ? () => setIsPopoverOpen(true): undefined}
-                onMouseLeave={!leftSlot ? () => setIsPopoverOpen(false): undefined}
+                className={`css-input ${className} ${isDisabled ? 'disabled': ''}`}
+                onMouseDown={(!leftSlot && !isDisabled) ? handleMouseDown : undefined}
+                style={{ cursor: !leftSlot ? cursorStyle: '' }}
+                onMouseEnter={(!leftSlot && !isDisabled) ? () => setIsPopoverOpen(true): undefined}
+                onMouseLeave={(!leftSlot && !isDisabled) ? () => setIsPopoverOpen(false): undefined}
             >
 
                 {leftSlot && (
@@ -160,8 +166,8 @@ export default function CSSInput({
                             className="left-icon"
                             onMouseDown={handleMouseDown}
                             style={{ cursor: cursorStyle }}
-                            onMouseEnter={leftSlot ? () => setIsPopoverOpen(true): undefined}
-                            onMouseLeave={leftSlot ? () => setIsPopoverOpen(false): undefined}
+                            onMouseEnter={(leftSlot && !isDisabled) ? () => setIsPopoverOpen(true): undefined}
+                            onMouseLeave={(leftSlot && !isDisabled) ? () => setIsPopoverOpen(false): undefined}
                         >
                             {leftSlot}
                         </span>
@@ -172,13 +178,22 @@ export default function CSSInput({
                     <input
                         value={value.value || 0}
                         onChange={handleChange}
+                        disabled={isDisabled}
+                        style={{ cursor: isDisabled ? cursorStyle: '' }}
                     />
                 )}
 
-                <select value={value.unit} onChange={handleUnitChange}>
-                    {units.map(unit => (
-                        <option key={unit} value={unit}>{unit}</option>
-                    ))}
+                <select
+                    value={value.unit}
+                    onChange={handleUnitChange}
+                    disabled={isDisabled}
+                    style={{ cursor: isDisabled ? cursorStyle: '' }}
+                >
+                    {
+                        units.map(unit => (
+                            <option key={unit} value={unit}>{unit}</option>
+                        ))
+                    }
                 </select>
             </div>
         </Popover>
