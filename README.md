@@ -1,6 +1,6 @@
-CSSBro
+cssBro
 
-CSSBro is an open-source alternative to CSSPro, offering an intuitive and powerful way to inspect, edit, and experiment with CSS on any webpage directly from your browser.
+cssBro is an open-source alternative to CSSPro, offering an intuitive and powerful way to inspect, edit, and experiment with CSS on any webpage directly from your browser.
 
 ## 🚀 Features
 
@@ -21,7 +21,7 @@ CSSBro is an open-source alternative to CSSPro, offering an intuitive and powerf
 ```sh
 git clone https://github.com/DevCafeInn/cssBro
 
-cd CSSBro
+cd cssBro
 ```
 
 2. Install dependencies:
@@ -44,13 +44,13 @@ npm run build
 
 - Click Load unpacked and select the build folder inside the project directory.
 
-- CSSBro will now be added as a Chrome extension.
+- cssBro will now be added as a Chrome extension.
 
 ## 🛠️ Usage
 
-1. Install CSSBro as a browser extension.
+1. Install cssBro as a browser extension.
 
-2. Open any webpage and activate CSSBro from the browser toolbar.
+2. Open any webpage and activate cssBro from the browser toolbar.
 
 3. Click on elements to inspect and tweak their styles in real-time.
 
@@ -66,7 +66,7 @@ Contributions are welcome! To contribute:
 
 ## 📜 License
 
-CSSBro is licensed under the GNU GENERAL PUBLIC LICENSE.
+cssBro is licensed under the GNU GENERAL PUBLIC LICENSE.
 
 
 ☕ Brewed with ❤️ by [DevCafeInn](https://github.com/DevCafeInn)!

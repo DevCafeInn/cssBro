@@ -1,17 +1,17 @@
 {
     "manifest_version": 3,
-    "name": "CSS Bro",
+    "name": "cssBro",
     "version": "1.0.0",
-    "description": "Description need to be writted",
+    "description": "cssBro is an open-source alternative to CSSPro, offering an intuitive and powerful way to inspect, edit, and experiment with CSS on any webpage directly from your browser.",
     "action": {
       "default_popup": "popup.html"
     },
     "content_scripts": [
       {
-        "matches": ["https://*.hemath.dev/*"],
+        "matches": ["<all_urls>"],
         "js": ["assets/main.js"],
         "css": ["assets/main.css"]
       }
     ],
-    "permissions": []
+    "permissions": ["scripting", "activeTab", "storage", "tabs"]
   }
