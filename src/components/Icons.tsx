@@ -50,4 +50,23 @@ function BorderRadiusIcon({width = 10}) {
     );
 }
 
-export { CopyIcon, WrongIcon, ArrowIcon, DimensionIcon,  FontIcon, ResetIcon, AngleIcon, BorderRadiusIcon };
+function FontSizeIcon({width = 17}) {
+    return (
+        <svg style={{verticalAlign: 'text-bottom'}} width={width} height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.33 11L9.168 3.3H10.147L12.974 11H11.995L11.291 9.02H8.013L7.298 11H6.33ZM8.288 8.272H11.016L9.652 4.466L8.288 8.272Z" fill="#CCCCCC"></path>
+            <path d="M0.27 11L2.592 4.7H3.393L5.706 11H4.905L4.329 9.38H1.647L1.062 11H0.27ZM1.872 8.768H4.104L2.988 5.654L1.872 8.768Z" fill="#CCCCCC"></path>
+        </svg>
+    );
+}
+
+function LineHeightIcon() {
+    return (
+        <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path transform="translate(0.5, 0)" d="M3.33 12L6.168 4.3H7.147L9.974 12H8.995L8.291 10.02H5.013L4.298 12H3.33ZM5.288 9.272H8.016L6.652 5.466L5.288 9.272Z" fill="#CCCCCC"></path>
+            <line y1="15.5" x2="14" y2="15.5" stroke="#CCCCCC"></line>
+            <line y1="0.5" x2="14" y2="0.5" stroke="#CCCCCC"></line>
+        </svg>
+    );
+}
+
+export { CopyIcon, WrongIcon, ArrowIcon, DimensionIcon,  FontIcon, ResetIcon, AngleIcon, BorderRadiusIcon, FontSizeIcon, LineHeightIcon };

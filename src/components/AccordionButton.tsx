@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { ArrowIcon } from "./Icons";
 
 function AccordionButton({ label, children }) {
 
     const [ isOpen, setIsOpen ] = useState(false);
 
-    function handleClick() {
-        setIsOpen(!isOpen);
+    const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
+        if((e.target as HTMLDivElement).closest('button.options')) {
+            setIsOpen(!isOpen);
+        }
     }
 
     return (

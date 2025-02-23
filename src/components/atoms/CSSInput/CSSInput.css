@@ -58,28 +58,6 @@
     color: #ccc !important;
 }
 
-.css-input select {
-    margin: 0;
-    margin-left: -4px;
-    border: 0;
-    width: auto;
-    text-align: left;
-    background: none !important;
-    padding: 6px 8px 6px 8px;
-    color: #fff !important;
-    outline: none;
-    cursor: pointer;
-    font-size: 13.333px;
-    vertical-align: initial;
-    height: initial;
-    line-height: initial;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    display: inline-block;
-    position: relative;
-    user-select: none;
-}
-
 .css-input.compact input {
     padding: 6px 0px 6px 0px !important;
 }

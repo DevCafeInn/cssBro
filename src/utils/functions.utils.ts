@@ -67,3 +67,20 @@ export function convertUnits(previousUnit: string, currentUnit: string, value: n
             throw new Error(`Unsupported current unit: ${currentUnit}`);
     }
 }
+
+export const rgbToHex = (rgb: string) => {
+    // Extract the numbers using a regular expression
+    const result = rgb.match(/\d+/g);
+
+    // Convert each number to hex and pad with zeroes if necessary
+    if(!result) return '';
+
+    const hex = result
+        .map(num => {
+            const hexValue = parseInt(num).toString(16);
+            return hexValue.length === 1 ? '0' + hexValue : hexValue;
+        })
+        .join('');
+
+    return `#${hex}`;
+};

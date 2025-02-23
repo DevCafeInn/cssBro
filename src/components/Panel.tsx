@@ -4,32 +4,38 @@ import CSSInput, { Value } from "./atoms/CSSInput/CSSInput";
 import { TwoDValuePicker } from "./atoms/TwoDValuePicker/TwoDValuePicker";
 import { AngleIcon, BorderRadiusIcon, CopyIcon, DimensionIcon, FontIcon, ResetIcon, WrongIcon } from './Icons.tsx'
 import AccordionButton from "./AccordionButton.tsx";
+import Typography from "./molecules/Typography/Typography.tsx";
+import { rgbToHex } from "../utils/functions.utils.ts";
 
 export type PanelProps = {
     element: HTMLElement,
 };
 
 export default function Panel({ element }: PanelProps) {
-    const [ css, setCSS ] = useState<Record<string, any>>({});
-    const [ parentData, setParentData ] = useState({
-        width: 0,
-        height: 0,
+    const [ fontStyles, setFontStyles ] = useState({
+        fontSize: {
+            value: 0,
+            unit: 'px'
+        },
+        fontFamily: '',
     });
 
-    useEffect(() => {
-        if(element.parentElement) {
-            const parentCSSProperties = getAllCSSProperties(element.parentElement);
-            const parentWidth = Number(parentCSSProperties.width.toString().replace('px', ''));
-            const parentHeight = Number(parentCSSProperties.height.toString().replace('px', ''));
+    const css = getAllCSSProperties(element);
+    
+    let parentWidth = 0;
+    let parentHeight = 0;
 
-            setParentData({
-                width: parentWidth,
-                height: parentHeight,
-            });
-        }
+    if(element.parentElement) {
+        const parentCSSProperties = getAllCSSProperties(element.parentElement);
+        parentWidth = Number(parentCSSProperties.width.toString().replace('px', ''));
+        parentHeight = Number(parentCSSProperties.height.toString().replace('px', ''));
+    }
 
-        setCSS(getAllCSSProperties(element));
-    }, []);
+    const parentData = {
+        width: parentWidth,
+        height: parentHeight,
+    }
+
 
     let title = element.tagName.toLowerCase();
 
@@ -45,16 +51,28 @@ export default function Panel({ element }: PanelProps) {
     }
 
     const dimensions = element.clientWidth + ' x ' + element.clientHeight;
-    const fontFamily = css['font-family']?.split(',')[0]
+    const fontFamily = css['font-family']?.toString()?.split(',')[0]?.replace(/"/g, '')
     const fontSize = css['font-size'];
+    const fontSizeValue = {
+        value: fontSize?.toString()?.replace('px', '') || 0,
+        unit: 'px'
+    };
+    const fontWeight = css['font-weight'] || 'normal';
+    const fontColor = rgbToHex(css['color']?.toString()) || '#000';
+
+    const lineHeight = css['line-height'];
+    const lineHeightValue = {
+        value: lineHeight?.toString()?.replace('px', '') || 0,
+        unit: 'px'
+    };
 
     const x = element.offsetLeft;
     const y = element.offsetTop;
 
-    const width = Number(css['width']?.replace('px', '')) || 0;
-    const height = Number(css['height']?.replace('px', '')) || 0;
+    const width = Number(css['width']?.toString()?.replace('px', '')) || 0;
+    const height = Number(css['height']?.toString()?.replace('px', '')) || 0;
 
-    const borderRadius = Number(css['border-radius']?.replace('px', '')) || 0;
+    const borderRadius = Number(css['border-radius']?.toString()?.replace('px', '')) || 0;
 
     return (
         <div id="panel-container">
@@ -214,7 +232,21 @@ export default function Panel({ element }: PanelProps) {
                 </AccordionButton>
                 
                 <AccordionButton label={"Typography"}>
-                    <div>Typography</div>
+                    <Typography
+                        element={element}
+                        parentData={parentData}
+                        fontSize={fontSizeValue as Value}
+                        fontWeight={fontWeight.toString()}
+                        fontFamily={fontFamily || 'Roboto'}
+                        fontColor={fontColor.toString()}
+                        // lineHeight={lineHeightValue}
+                        onFontChange={(fontSize: Value, fontFamily: string) => {
+                            setFontStyles({
+                                fontSize,
+                                fontFamily,
+                            });
+                        }}
+                    />
                 </AccordionButton>
                 
                 <AccordionButton label={"Background"}>
