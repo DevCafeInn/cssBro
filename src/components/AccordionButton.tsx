@@ -11,14 +11,16 @@ function AccordionButton({ label, children }) {
 
     return (
         <div className={`options-container ${isOpen ? "style" : ''}`} onClick={handleClick}>
-            <div>
-                <button className="options">
-                    <span>{label}</span>
-                    <ArrowIcon width={16} isOpen={isOpen} />
-                </button>
-                <div className={isOpen ? "style" : ''}>
-                    { isOpen && children }
-                </div>
+            <button className="options">
+                <span>{label}</span>
+                <ArrowIcon width={16} isOpen={isOpen} />
+            </button>
+            <div className={isOpen ? "child" : ''}>
+                {
+                    isOpen
+                    ? children
+                    : null
+                }
             </div>
         </div>
     )

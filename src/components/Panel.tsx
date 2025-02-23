@@ -62,9 +62,9 @@ export default function Panel({ element }: PanelProps) {
                 <div className="header">
                     <span className="title">{title}</span>
                     <div className="pinned-controls">
+                        <div className='icon-hover-container'> <ResetIcon width={13} /> <span className='tooltip'>Reset CSS changes</span> </div>
                         <div className='icon-hover-container'> <CopyIcon width={13}  /> <span className='tooltip'>Copy to clipboard</span> </div>
                         <div className='icon-hover-container'> <WrongIcon width={9} /> <span className='tooltip'>Close window</span> </div>
-                        <div className='icon-hover-container'> <ResetIcon width={13} /> <span className='tooltip'>Reset CSS changes</span> </div>
                     </div>
                 </div>
 
@@ -147,11 +147,70 @@ export default function Panel({ element }: PanelProps) {
 
 
                 <AccordionButton label={"Spacing"}>
-                    <div>SPACING</div>
-                    <div>SPACING</div>
-                    <div>SPACING</div>
-                    <div>SPACING</div>
-                    <div>SPACING</div>
+                    <TwoDValuePicker
+                        key={JSON.stringify([
+                            css['margin-top'],
+                            css['margin-bottom'],
+                            css['margin-left'],
+                            css['margin-right'],
+                            css['padding-top'],
+                            css['padding-bottom'],
+                            css['padding-left'],
+                            css['padding-right'],
+                        ])}
+                        parentData={parentData}
+                        showInnerPicker
+                        topLeftText="Margin"
+                        centerText="Padding"
+                        initialData={{
+                            top: {
+                                value: Number(css['margin-top']?.replace('px', '')),
+                                unit: 'auto',
+                            },
+                            bottom: {
+                                value: Number(css['margin-bottom']?.replace('px', '')),
+                                unit: 'auto',
+                            },
+                            left: {
+                                value: Number(css['margin-left']?.replace('px', '')),
+                                unit: 'auto',
+                            },
+                            right: {
+                                value: Number(css['margin-right']?.replace('px', '')),
+                                unit: 'auto',
+                            },
+                        }}
+                        initialInnerData={{
+                            top: {
+                                value: Number(css['padding-top']?.replace('px', '')),
+                                unit: 'auto',
+                            },
+                            bottom: {
+                                value: Number(css['padding-bottom']?.replace('px', '')),
+                                unit: 'auto',
+                            },
+                            left: {
+                                value: Number(css['padding-left']?.replace('px', '')),
+                                unit: 'auto',
+                            },
+                            right: {
+                                value: Number(css['padding-right']?.replace('px', '')),
+                                unit: 'auto',
+                            },
+                        }}
+                        onChange={(margin, padding) => {
+                            console.log(margin.top.value + margin.top.unit);
+                            element.style.marginTop = margin.top.value + margin.top.unit;
+                            element.style.marginBottom = margin.bottom.value + margin.bottom.unit;
+                            element.style.marginLeft = margin.left.value + margin.left.unit;
+                            element.style.marginRight = margin.right.value + margin.right.unit;
+
+                            element.style.paddingTop = padding.top.value + padding.top.unit;
+                            element.style.paddingBottom = padding.bottom.value + padding.bottom.unit;
+                            element.style.paddingLeft = padding.left.value + padding.left.unit;
+                            element.style.paddingRight = padding.right.value + padding.right.unit;
+                        }}
+                    />
                 </AccordionButton>
                 
                 <AccordionButton label={"Typography"}>
@@ -185,102 +244,6 @@ export default function Panel({ element }: PanelProps) {
                 <AccordionButton label={"Filters"}>
                     <div>Filters</div>
                 </AccordionButton>
-
-
-                {/* <h1>CSS Properties</h1> */}
-            {/* <br /> */}
-
-            {/* <CSSInput
-                key={JSON.stringify([css.width, JSON.stringify(parentData)])}
-                parentData={parentData}
-                initialValue={{
-                    value: Number(css.width?.replace('px', '')),
-                    unit: 'px',
-                }}
-                onChange={(value) => {
-                    const width = value.value;
-                    
-                    if(!isNaN(width)) {
-                        element.style.width = width + value.unit;
-                    }
-                }}
-                leftSlot={ <span>W</span> }
-                name="width"
-                units={[
-                    'auto',
-                    'px',
-                    '%',
-                    'em',
-                    'rem',
-                    'vw',
-                    'vh'
-                ]}
-            />
-
-            <TwoDValuePicker
-                key={JSON.stringify([
-                    css['margin-top'],
-                    css['margin-bottom'],
-                    css['margin-left'],
-                    css['margin-right'],
-                    css['padding-top'],
-                    css['padding-bottom'],
-                    css['padding-left'],
-                    css['padding-right'],
-                ])}
-                parentData={parentData}
-                showInnerPicker
-                topLeftText="Margin"
-                centerText="Padding"
-                initialData={{
-                    top: {
-                        value: Number(css['margin-top']?.replace('px', '')),
-                        unit: 'auto',
-                    },
-                    bottom: {
-                        value: Number(css['margin-bottom']?.replace('px', '')),
-                        unit: 'auto',
-                    },
-                    left: {
-                        value: Number(css['margin-left']?.replace('px', '')),
-                        unit: 'auto',
-                    },
-                    right: {
-                        value: Number(css['margin-right']?.replace('px', '')),
-                        unit: 'auto',
-                    },
-                }}
-                initialInnerData={{
-                    top: {
-                        value: Number(css['padding-top']?.replace('px', '')),
-                        unit: 'auto',
-                    },
-                    bottom: {
-                        value: Number(css['padding-bottom']?.replace('px', '')),
-                        unit: 'auto',
-                    },
-                    left: {
-                        value: Number(css['padding-left']?.replace('px', '')),
-                        unit: 'auto',
-                    },
-                    right: {
-                        value: Number(css['padding-right']?.replace('px', '')),
-                        unit: 'auto',
-                    },
-                }}
-                onChange={(margin, padding) => {
-                    console.log(margin.top.value + margin.top.unit);
-                    element.style.marginTop = margin.top.value + margin.top.unit;
-                    element.style.marginBottom = margin.bottom.value + margin.bottom.unit;
-                    element.style.marginLeft = margin.left.value + margin.left.unit;
-                    element.style.marginRight = margin.right.value + margin.right.unit;
-
-                    element.style.paddingTop = padding.top.value + padding.top.unit;
-                    element.style.paddingBottom = padding.bottom.value + padding.bottom.unit;
-                    element.style.paddingLeft = padding.left.value + padding.left.unit;
-                    element.style.paddingRight = padding.right.value + padding.right.unit;
-                }}
-            /> */}
             </div>
 
         </div>
