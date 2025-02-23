@@ -15,6 +15,10 @@ export default defineConfig({
         {
           src: 'public/popup.html',
           dest: '.',
+        },
+        {
+          src: 'public/cssbro.png',
+          dest: '.',
         }
       ],
     }),

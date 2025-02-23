@@ -6,6 +6,12 @@
     "action": {
       "default_popup": "popup.html"
     },
+    "icons": {
+      "16": "cssbro.png",
+      "32": "cssbro.png",
+      "48": "cssbro.png",
+      "128": "cssbro.png"      
+    },
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
