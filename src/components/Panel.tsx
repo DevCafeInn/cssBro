@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllCSSProperties } from "../utils/dom.utils";
 import CSSInput, { Value } from "./atoms/CSSInput/CSSInput";
 import { TwoDValuePicker } from "./atoms/TwoDValuePicker/TwoDValuePicker";
-import { CopyIcon, DimensionIcon, FontIcon, ResetIcon, WrongIcon } from './Icons.tsx'
+import { AngleIcon, BorderRadiusIcon, CopyIcon, DimensionIcon, FontIcon, ResetIcon, WrongIcon } from './Icons.tsx'
 import AccordionButton from "./AccordionButton.tsx";
 
 export type PanelProps = {
@@ -31,11 +31,36 @@ export default function Panel({ element }: PanelProps) {
         setCSS(getAllCSSProperties(element));
     }, []);
 
+    let title = element.tagName.toLowerCase();
+
+    if(element.id) {
+        title += ` #${element.id}`;
+    }
+
+    if(element.classList.length > 0) {
+        title += ' ';
+        element.classList.forEach(className => {
+            title += `.${className}`;
+        })
+    }
+
+    const dimensions = element.clientWidth + ' x ' + element.clientHeight;
+    const fontFamily = css['font-family']?.split(',')[0]
+    const fontSize = css['font-size'];
+
+    const x = element.offsetLeft;
+    const y = element.offsetTop;
+
+    const width = Number(css['width']?.replace('px', '')) || 0;
+    const height = Number(css['height']?.replace('px', '')) || 0;
+
+    const borderRadius = Number(css['border-radius']?.replace('px', '')) || 0;
+
     return (
         <div id="panel-container">
             <div className="top-container">
                 <div className="header">
-                    <span className="title">strong</span>
+                    <span className="title">{title}</span>
                     <div className="pinned-controls">
                         <div className='icon-hover-container'> <CopyIcon width={13}  /> <span className='tooltip'>Copy to clipboard</span> </div>
                         <div className='icon-hover-container'> <WrongIcon width={9} /> <span className='tooltip'>Close window</span> </div>
@@ -45,13 +70,13 @@ export default function Panel({ element }: PanelProps) {
 
                 <div className="dimensions">
                     <DimensionIcon width={14} />
-                    <span>346.63×34.4</span>
+                    <span>{dimensions}</span>
                 </div>
 
                 <div className="font-details">
                     <FontIcon width={12} />
                     <span> 
-                        <a href='#'>CerebriSans <span className='tooltip'>Click to search font on google</span></a> 26px
+                        <a href='#'>{fontFamily}<span className='tooltip'>Click to search font on google</span></a> {fontSize}
                         
                     </span>
                 </div>
@@ -60,29 +85,64 @@ export default function Panel({ element }: PanelProps) {
 
             <div className="sub-container">
                 <div className="properties">
-                    <div>
-                        <span>X <input /> </span>
-                    </div>
+                    <CSSInput
+                        key={x}
+                        initialValue={{value: x, unit: 'px'}}
+                        leftSlot={<span>X</span>}
+                        name="x"
+                        onChange={() => {}}
+                        parentData={parentData}
+                        isDisabled
+                    />
 
-                    <div>
-                        <span>Y <input /> </span>
-                    </div>
+                    <CSSInput
+                        key={y}
+                        initialValue={{value: y, unit: 'px'}}
+                        leftSlot={<span>Y</span>}
+                        name="y"
+                        onChange={() => {}}
+                        parentData={parentData}
+                        isDisabled
+                    />
 
-                    <div>
-                        <span>L <input /> </span>
-                    </div>
+                    <CSSInput
+                        initialValue={{value: 0, unit: 'º'}}
+                        leftSlot={<AngleIcon />}
+                        name="rotation"
+                        onChange={(value) => element.style.transform = `rotate(${value.value}deg)`}
+                        parentData={parentData}
+                        units={['º']}
+                    />
 
-                    <div>
-                        <span>W <input /> </span>
-                    </div>
+                    <CSSInput
+                        key={'w'+width}
+                        initialValue={{value: width, unit: 'px'}}
+                        leftSlot={<span>W</span>}
+                        name="width"
+                        onChange={(value) => element.style.width = `${value.value}${value.unit}`}
+                        parentData={parentData}
+                        units={['auto', 'px', '%', 'em', 'rem', 'vw', 'vh']}
+                    />
 
-                    <div>
-                        <span>H <input /> </span>
-                    </div>
+                    <CSSInput
+                        key={'h'+height}
+                        initialValue={{value: height, unit: 'px'}}
+                        leftSlot={<span>H</span>}
+                        name="height"
+                        onChange={(value) => element.style.height = `${value.value}${value.unit}`}
+                        parentData={parentData}
+                        units={['auto', 'px', '%', 'em', 'rem', 'vw', 'vh']}
+                    />
 
-                    <div>
-                        <span>0 <input /> </span>
-                    </div>
+                    <CSSInput
+                        key={'br'+borderRadius}
+                        initialValue={{value: borderRadius, unit: 'px'}}
+                        leftSlot={<BorderRadiusIcon />}
+                        name="border-radius"
+                        onChange={(value) => element.style.borderRadius = `${value.value}${value.unit}`}
+                        parentData={parentData}
+                        units={['auto', 'px', '%', 'em', 'rem', 'vw', 'vh']}
+                    />
                 </div>
 
 
@@ -127,10 +187,10 @@ export default function Panel({ element }: PanelProps) {
                 </AccordionButton>
 
 
-                <h1>CSS Properties</h1>
-            <br />
+                {/* <h1>CSS Properties</h1> */}
+            {/* <br /> */}
 
-            <CSSInput
+            {/* <CSSInput
                 key={JSON.stringify([css.width, JSON.stringify(parentData)])}
                 parentData={parentData}
                 initialValue={{
@@ -156,9 +216,6 @@ export default function Panel({ element }: PanelProps) {
                     'vh'
                 ]}
             />
-
-            <br/>
-            <br/>
 
             <TwoDValuePicker
                 key={JSON.stringify([
@@ -223,7 +280,7 @@ export default function Panel({ element }: PanelProps) {
                     element.style.paddingLeft = padding.left.value + padding.left.unit;
                     element.style.paddingRight = padding.right.value + padding.right.unit;
                 }}
-            />
+            /> */}
             </div>
 
         </div>
