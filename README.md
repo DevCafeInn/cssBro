@@ -1,4 +1,4 @@
-cssBro
+![cssbro-demo](https://github.com/user-attachments/assets/17569714-9e4f-4c57-a055-98afdeb0f8f8)![cssbro-demo](https://github.com/user-attachments/assets/4fa8935b-d561-4659-8fb4-90101c29cd15)## cssBro
 
 cssBro is an open-source alternative to CSSPro, offering an intuitive and powerful way to inspect, edit, and experiment with CSS on any webpage directly from your browser.
 
@@ -53,6 +53,10 @@ npm run build
 2. Open any webpage and activate cssBro from the browser toolbar.
 
 3. Click on elements to inspect and tweak their styles in real-time.
+
+## Demo Video
+Watch the video here - https://drive.google.com/file/d/1REoMbbBxMiv0kXs26AerO5OXJzdgqBAP/view?usp=sharing
+
 
 ## 🌱 Contributing
 
