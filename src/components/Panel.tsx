@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getAllCSSProperties } from "../utils/dom.utils";
 import CSSInput, { Value } from "./atoms/CSSInput/CSSInput";
 import { TwoDValuePicker } from "./atoms/TwoDValuePicker/TwoDValuePicker";
@@ -12,7 +12,7 @@ export type PanelProps = {
 };
 
 export default function Panel({ element }: PanelProps) {
-    const [ fontStyles, setFontStyles ] = useState({
+    const [ _fontStyles, setFontStyles ] = useState({
         fontSize: {
             value: 0,
             unit: 'px'
@@ -60,11 +60,11 @@ export default function Panel({ element }: PanelProps) {
     const fontWeight = css['font-weight'] || 'normal';
     const fontColor = rgbToHex(css['color']?.toString()) || '#000';
 
-    const lineHeight = css['line-height'];
-    const lineHeightValue = {
-        value: lineHeight?.toString()?.replace('px', '') || 0,
-        unit: 'px'
-    };
+    // const lineHeight = css['line-height'];
+    // const lineHeightValue = {
+    //     value: lineHeight?.toString()?.replace('px', '') || 0,
+    //     unit: 'px'
+    // };
 
     const x = element.offsetLeft;
     const y = element.offsetTop;
@@ -182,37 +182,37 @@ export default function Panel({ element }: PanelProps) {
                         centerText="Padding"
                         initialData={{
                             top: {
-                                value: Number(css['margin-top']?.replace('px', '')),
+                                value: Number(css['margin-top']?.toString()?.replace('px', '')),
                                 unit: 'auto',
                             },
                             bottom: {
-                                value: Number(css['margin-bottom']?.replace('px', '')),
+                                value: Number(css['margin-bottom']?.toString()?.replace('px', '')),
                                 unit: 'auto',
                             },
                             left: {
-                                value: Number(css['margin-left']?.replace('px', '')),
+                                value: Number(css['margin-left']?.toString()?.replace('px', '')),
                                 unit: 'auto',
                             },
                             right: {
-                                value: Number(css['margin-right']?.replace('px', '')),
+                                value: Number(css['margin-right']?.toString()?.replace('px', '')),
                                 unit: 'auto',
                             },
                         }}
                         initialInnerData={{
                             top: {
-                                value: Number(css['padding-top']?.replace('px', '')),
+                                value: Number(css['padding-top']?.toString()?.replace('px', '')),
                                 unit: 'auto',
                             },
                             bottom: {
-                                value: Number(css['padding-bottom']?.replace('px', '')),
+                                value: Number(css['padding-bottom']?.toString()?.replace('px', '')),
                                 unit: 'auto',
                             },
                             left: {
-                                value: Number(css['padding-left']?.replace('px', '')),
+                                value: Number(css['padding-left']?.toString()?.replace('px', '')),
                                 unit: 'auto',
                             },
                             right: {
-                                value: Number(css['padding-right']?.replace('px', '')),
+                                value: Number(css['padding-right']?.toString()?.replace('px', '')),
                                 unit: 'auto',
                             },
                         }}

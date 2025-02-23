@@ -2,7 +2,7 @@ import Select from 'react-select';
 
 import './Typography.css';
 import CSSInput, { Value } from '../../atoms/CSSInput/CSSInput';
-import { FontSizeIcon, LineHeightIcon } from '../../Icons';
+import { FontSizeIcon } from '../../Icons';
 import { useEffect, useState } from 'react';
 
 const fonts = [
@@ -137,7 +137,7 @@ export type TypographyProps = {
     fontWeight: string,
     fontSize: Value,
     fontColor: string,
-    lineHeight: Value,
+    // lineHeight: Value,
     element: HTMLElement,
     onFontChange: (fontSize: Value, fontFamily: string) => void
 };
@@ -148,7 +148,7 @@ export default function Typography({
     fontWeight,
     fontSize,
     fontColor,
-    lineHeight,
+    // lineHeight,
     element,
     onFontChange,
 }: TypographyProps) {

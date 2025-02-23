@@ -1,7 +1,11 @@
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, PropsWithChildren, useState } from "react";
 import { ArrowIcon } from "./Icons";
 
-function AccordionButton({ label, children }) {
+export type AccordionButtonProps = PropsWithChildren & {
+    label: string
+};
+
+function AccordionButton({ label, children }: AccordionButtonProps) {
 
     const [ isOpen, setIsOpen ] = useState(false);
 
