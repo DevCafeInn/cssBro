@@ -1,5 +1,5 @@
 <div style="text-align: center">
-  ![cssbro-demo](https://github.com/user-attachments/assets/17569714-9e4f-4c57-a055-98afdeb0f8f8)
+  <img src="https://github.com/user-attachments/assets/17569714-9e4f-4c57-a055-98afdeb0f8f8" alt="CSSBro demo" />
 </div>
 
 cssBro is an open-source alternative to CSSPro, offering an intuitive and powerful way to inspect, edit, and experiment with CSS on any webpage directly from your browser.
